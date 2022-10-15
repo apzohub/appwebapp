@@ -1,0 +1,26 @@
+<form [formGroup]="form" class="form-auth d-grid col rounded bg-white">
+    <div class="mb-3 w-100">
+        <!-- <span class="material-icons">email</span> -->
+        <input placeholder="Email" name="email" formControlName="email" class="w-100">
+    </div>
+    <div *ngIf="type != 'fpwd'" class="mb-3 w-100">
+        <!-- <span class="material-icons">lock</span> -->
+        <input type="password" placeholder="Password" name="password" formControlName="password" class="w-100">
+    </div>
+    <div *ngIf="type == 'reg'" class="mb-3 w-100">
+        <!-- <span class="material-icons">lock</span> -->
+        <input type="password" placeholder="Confirm Password" name="cpassword" formControlName="cpassword" class="w-100">
+    </div>
+    
+    <button *ngIf="type == 'auth'" (click)="login()">Login</button>
+    <button *ngIf="type == 'reg'" (click)="register()">Register</button>
+    <button *ngIf="type == 'fpwd'" (click)="fpwd()">Reset Password</button>
+
+    <div *ngIf="type == 'auth'" class="forgot-pw" >
+        <p><a routerLink="/fpwd">Forgot password?</a></p>
+    </div>
+    <div class="auth-footer">
+          <p *ngIf="type == 'auth'">Don't have an account? <a class="sign-up" routerLink="/rg">Sign up</a></p>
+          <p *ngIf="type == 'reg'">Already have an account? <a class="sign-up" routerLink="/auth">Login</a></p>
+    </div>
+</form>

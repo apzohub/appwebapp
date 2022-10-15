@@ -1,0 +1,26 @@
+.form-auth {
+    width: 360px;
+    padding: 30px;
+}
+
+/* .input{
+    background-image: url('/assets/app/email.png'); 
+    background-position: right center;
+    background-repeat: no-repeat;
+} */
+
+span{
+    vertical-align: text-bottom;
+}
+
+/* 
+.forgot-pw a{
+    color: #9ca6af;
+} */
+
+.forgot-pw  a:hover,
+.auth-footer a:hover {
+    border-bottom: 2px solid;
+}
+
+
