@@ -15,6 +15,7 @@ const routes: Routes = [
     ]
   },
   { path: 'auth', component: AuthComponent },
+  { path: 'echeck', component: AuthComponent, data: {type: 'echeck'}  },
   { path: 'rg', component: AuthComponent, data: {type: 'reg'} },
   { path: 'fpwd', component: AuthComponent, data: {type: 'fpwd'} },
   { path: '**', redirectTo: '', pathMatch: 'full' }

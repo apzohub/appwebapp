@@ -1,25 +1,28 @@
-<form [formGroup]="form" class="form-auth d-grid col rounded bg-white">
-    <div class="mb-3 w-100">
+<form [formGroup]="form" class="form-auth col rounded bg-white">
+    <div *ngIf="type != 'echeck'" class="mb-3">
         <!-- <span class="material-icons">email</span> -->
-        <input placeholder="Email" name="email" formControlName="email" class="w-100">
+        <input type="email" placeholder="Email" name="email" formControlName="email" class="form-control">
     </div>
-    <div *ngIf="type != 'fpwd'" class="mb-3 w-100">
+    <div *ngIf="type == 'auth' || type == 'reg'" class="mb-3">
         <!-- <span class="material-icons">lock</span> -->
-        <input type="password" placeholder="Password" name="password" formControlName="password" class="w-100">
+        <input type="password" placeholder="Password" name="password" formControlName="password" class="form-control">
     </div>
-    <div *ngIf="type == 'reg'" class="mb-3 w-100">
+    <div *ngIf="type == 'reg'" class="mb-3">
         <!-- <span class="material-icons">lock</span> -->
-        <input type="password" placeholder="Confirm Password" name="cpassword" formControlName="cpassword" class="w-100">
+        <input type="password" placeholder="Confirm Password" name="cpassword" formControlName="cpassword" class="form-control">
+    </div>
+
+    <div *ngIf="type == 'echeck'" class="d-grid">
+        <p>We have sent you an email with link for activating your account. Please check that email to activate your account.</p>
+        <button routerLink="/auth" class="btn btn-primary">OK</button>
     </div>
     
-    <button *ngIf="type == 'auth'" (click)="login()">Login</button>
-    <button *ngIf="type == 'reg'" (click)="register()">Register</button>
-    <button *ngIf="type == 'fpwd'" (click)="fpwd()">Reset Password</button>
+    <button *ngIf="type == 'auth'" (click)="login()" class="btn btn-primary w-100" >Login</button>
+    <button *ngIf="type == 'reg'" (click)="register()" class="btn btn-primary w-100">Register</button>
+    <button *ngIf="type == 'fpwd'" (click)="fpwd()" class="btn btn-primary w-100">Reset Password</button>
 
-    <div *ngIf="type == 'auth'" class="forgot-pw" >
-        <p><a routerLink="/fpwd">Forgot password?</a></p>
-    </div>
-    <div class="auth-footer">
+    <div class="lnk d-grid mt-3"> 
+          <p *ngIf="type == 'auth'"><a routerLink="/fpwd">Forgot password?</a></p>
           <p *ngIf="type == 'auth'">Don't have an account? <a class="sign-up" routerLink="/rg">Sign up</a></p>
           <p *ngIf="type == 'reg'">Already have an account? <a class="sign-up" routerLink="/auth">Login</a></p>
     </div>

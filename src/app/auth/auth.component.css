@@ -1,5 +1,5 @@
 .form-auth {
-    width: 360px;
+    max-width: 460px;
     padding: 30px;
 }
 
@@ -13,13 +13,7 @@ span{
     vertical-align: text-bottom;
 }
 
-/* 
-.forgot-pw a{
-    color: #9ca6af;
-} */
-
-.forgot-pw  a:hover,
-.auth-footer a:hover {
+.lnk a:hover {
     border-bottom: 2px solid;
 }
 
