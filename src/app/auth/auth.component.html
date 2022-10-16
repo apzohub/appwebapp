@@ -1,7 +1,7 @@
 <form [formGroup]="form" class="form-auth col rounded bg-white">
-    <div *ngIf="type != 'echeck'" class="mb-3">
+    <div *ngIf="type != 'echeck' && type != 'verify'" class="mb-3">
         <!-- <span class="material-icons">email</span> -->
-        <input type="email" placeholder="Email" name="email" formControlName="email" class="form-control">
+        <input placeholder="Email" name="email" formControlName="email" class="form-control">
     </div>
     <div *ngIf="type == 'auth' || type == 'reg'" class="mb-3">
         <!-- <span class="material-icons">lock</span> -->
@@ -11,9 +11,13 @@
         <!-- <span class="material-icons">lock</span> -->
         <input type="password" placeholder="Confirm Password" name="cpassword" formControlName="cpassword" class="form-control">
     </div>
-
+    <div>{{err}}</div>
     <div *ngIf="type == 'echeck'" class="d-grid">
         <p>We have sent you an email with link for activating your account. Please check that email to activate your account.</p>
+        <button routerLink="/auth" class="btn btn-primary">OK</button>
+    </div>
+    <div *ngIf="type == 'verify'" class="d-grid">
+        <p>Your account is active now. Please click OK to login.</p>
         <button routerLink="/auth" class="btn btn-primary">OK</button>
     </div>
     
@@ -23,7 +27,7 @@
 
     <div class="lnk d-grid mt-3"> 
           <p *ngIf="type == 'auth'"><a routerLink="/fpwd">Forgot password?</a></p>
-          <p *ngIf="type == 'auth'">Don't have an account? <a class="sign-up" routerLink="/rg">Sign up</a></p>
+          <p *ngIf="type == 'auth'">Don't have an account? <a class="sign-up" routerLink="/reg">Sign up</a></p>
           <p *ngIf="type == 'reg'">Already have an account? <a class="sign-up" routerLink="/auth">Login</a></p>
     </div>
 </form>

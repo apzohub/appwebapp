@@ -11,8 +11,10 @@ const httpOptions = {
 export class HttpService<T> {
   constructor(private http: HttpClient, @Inject(String) private apiEndpoint:string) { }
 
-  read(id: string, path?: string): Observable<T> {
-    return this.http.get<T>(`${this.apiEndpoint}${path!=null? `/${path}`:''}/${id}`) 
+  read(id: string, path?: string, query?:string): Observable<T> {
+    let uri = `${this.apiEndpoint}${path!=null? `/${path}`:''}/${id}${query?`?${query}`:''}`;
+    console.log(uri);
+    return this.http.get<T>(uri) 
     .pipe(
       retry(1), 
       catchError(this.handleError) 

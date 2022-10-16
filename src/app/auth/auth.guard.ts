@@ -9,7 +9,7 @@ import { HttpService } from '../common/http.service';
 import { User, TKN } from './user';
 
 
-const AUTH_EP = environment.apiEndpoint+'/auth';
+export const AUTH_EP = environment.apiEndpoint+'/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +22,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     this.authService = new HttpService(http, AUTH_EP);
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot, 
+              state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      console.log('canActivate');
+
       if(this.isLoggedOn()){
         return true;
       }
@@ -32,48 +33,21 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       return false;
   }
 
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
+  canActivateChild(childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+      console.log('canActivateChild');
+      return true;
   }
 
-  canLoad(
-    route: Route,
+  canLoad(route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+      console.log('canLoad');
+      return true;
   }
 
   isLoggedOn(): boolean{
-     const tkn = localStorage.getItem(TKN);
-     return tkn? tkn.length > 0: false;
-  }
-
-  login(email:string, password:string ) {
-    return this.authService.create({email, password}, '/ses')
-      .pipe(
-        tap((tkn: any) => {
-          // console.log(tkn);
-          localStorage.setItem(TKN, tkn.token);
-        })
-      );
-          
-  }
-
-  logout(email:string, password:string ) {
-    return this.authService.delete('/ses')
-      .pipe(
-        tap((tkn: any) => {
-          // console.log(tkn);
-          localStorage.removeItem(TKN);
-        })
-      );
-  }
-  register(email:string, password:string): Observable<any> {
-    return this.authService.create({email, password}, 'reg');
-  }
-
-  fpwd(pwd: any): Observable<any> {
-    return this.authService.update(pwd, 'fpwd');
+    const tkn = localStorage.getItem(TKN);
+    console.log('isLoggedOn', tkn == undefined);
+    return tkn == undefined;
   }
 }
