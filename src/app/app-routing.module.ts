@@ -15,7 +15,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'auth', component: AuthComponent },
+  { path: 'auth', component: AuthComponent }, //use login
   { path: 'auth/logout', component: AuthComponent,  data: {type: 'logout'}},
   { path: 'reg', component: AuthComponent, data: {type: 'reg'} },
   { path: 'reg/echeck', component: AuthComponent, data: {type: 'echeck'} },
