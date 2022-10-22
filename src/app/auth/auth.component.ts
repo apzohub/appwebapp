@@ -39,7 +39,7 @@ export class AuthComponent implements OnInit {
                         localStorage.setItem(TKN, tkn.token);
                         //this.router.navigate(['/']);
                     },
-                    error: error => console.log(error)
+                    error: error => console.log('verify: ',error)
                 });
             }
         });
