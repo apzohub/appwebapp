@@ -16,7 +16,7 @@ export class HttpService<T> {
     console.log(uri);
     return this.http.get<T>(uri) 
     .pipe(
-      retry(1), 
+      //retry(1), 
       catchError(this.handleError) 
     );
   }
@@ -30,7 +30,7 @@ export class HttpService<T> {
     // console.log(`${this.apiEndpoint}/${path!==undefined? path:''}`);
     return this.http.post(`${this.apiEndpoint}${path? `/${path}`:''}`, entity, httpOptions)
     .pipe(
-      retry(1), 
+      //retry(1), 
       catchError(this.handleError) 
     );
   }
@@ -39,7 +39,7 @@ export class HttpService<T> {
     let url = `${this.apiEndpoint}${path? `/${path}`:''}?${query}`;
     return this.http.get<T[]>(this.apiEndpoint)
     .pipe(
-      retry(1), 
+      //retry(1), 
       catchError(this.handleError) 
     );
   }
@@ -48,7 +48,7 @@ export class HttpService<T> {
     // console.log(`${this.apiEndpoint}/${path!==undefined? path:''}`);
     return this.http.put(`${this.apiEndpoint}/${path!==undefined? path:''}`, entity, httpOptions)
     .pipe(
-      retry(1), 
+      //retry(1), 
       catchError(this.handleError) 
     );
   }
@@ -56,7 +56,7 @@ export class HttpService<T> {
   delete(id: string, path?: string): Observable<T> {
     return this.http.delete<T>(`${this.apiEndpoint}${path!=null? `/${path}`:''}/${id}`) 
     .pipe(
-      retry(1), 
+      //retry(1), 
       catchError(this.handleError) 
     );
   }
@@ -67,6 +67,6 @@ export class HttpService<T> {
     } else {
       console.error(`Err code ${error.status}, body: `, error.error);
     }
-    return throwError(() => new Error('Something went wrong; please try again later.'));
+    return throwError(() => error.error.err?error.error: new Error('Something went wrong; please try again later.'));
   }
 }

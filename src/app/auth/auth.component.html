@@ -11,7 +11,7 @@
         <!-- <span class="material-icons">lock</span> -->
         <input type="password" placeholder="Confirm Password" name="cpassword" formControlName="cpassword" class="form-control">
     </div>
-    <div>{{err}}</div>
+    <div class="msg-err">{{err}}</div>
     <div *ngIf="type == 'echeck'" class="d-grid">
         <p>We have sent you an email with link for activating your account. Please check that email to activate your account.</p>
         <button routerLink="/auth" class="btn btn-primary">OK</button>
