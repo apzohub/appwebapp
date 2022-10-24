@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'reg/echeck', component: AuthComponent, data: {type: 'echeck'} },
   { path: 'reg/verify', component: AuthComponent, data: {type: 'verify'} },
   { path: 'fpwd', component: AuthComponent, data: {type: 'fpwd'} },
+  { path: 'fpwd/check', component: AuthComponent, data: {type: 'fpwdecheck'} },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 

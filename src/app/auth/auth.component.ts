@@ -88,17 +88,19 @@ export class AuthComponent implements OnInit {
         const val = this.form.value;
         if (val.email) {
             this.authService.update({email:val.email}, 'fpwd').subscribe({
-                next:() => {
+                next:(res) => {
                     // console.log("fpwd");
-                    this.router.navigate(['/auth']);
+                    //this.router.navigate([res.location]);
+                    this.router.navigate(['/fpwd/check']);
                 },
                 error: error => {
                     console.log('fpwd: ',error)
                     this.err = error.err?error.err:'Something went wrong';
                 }
             });
+            return;
         }
         this.err = 'Email is required';
-        this.router.navigate(['/fpwd']);
+        // this.router.navigate(['/fpwd']);
     }
 }

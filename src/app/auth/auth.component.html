@@ -1,5 +1,5 @@
 <form [formGroup]="form" class="form-auth col rounded bg-white">
-    <div *ngIf="type != 'echeck' && type != 'verify'" class="mb-3">
+    <div *ngIf="type != 'echeck' && type != 'verify' && type != 'fpwdecheck'" class="mb-3">
         <!-- <span class="material-icons">email</span> -->
         <input placeholder="Email" name="email" formControlName="email" class="form-control">
     </div>
@@ -11,13 +11,14 @@
         <!-- <span class="material-icons">lock</span> -->
         <input type="password" placeholder="Confirm Password" name="cpassword" formControlName="cpassword" class="form-control">
     </div>
-    <div class="msg-err">{{err}}</div>
-    <div *ngIf="type == 'echeck'" class="d-grid">
-        <p>We have sent you an email with link for activating your account. Please check that email to activate your account.</p>
+    <div class="msg-err mb-3">{{err}}</div>
+    <div *ngIf="type == 'echeck' || type == 'fpwdecheck'" class="d-grid">
+        <p>We have sent you an email with link to {{(type != 'fpwdecheck')?'activate your account':'reset your password'}}. 
+            Please check that email to {{(type != 'fpwdecheck')?'access to':'recover'}} your account.</p>
         <button routerLink="/auth" class="btn btn-primary">OK</button>
     </div>
     <div *ngIf="type == 'verify'" class="d-grid">
-        <p>Your account is active now. Please click OK to login.</p>
+        <p *ngIf="!err">Your account is active now. Please click OK to login.</p>
         <button routerLink="/auth" class="btn btn-primary">OK</button>
     </div>
     
