@@ -50,19 +50,17 @@ export class AuthComponent implements OnInit {
 
     login() {
         const val = this.form.value;
-
         if (val.email && val.password) {
             this.authService.create({email:val.email, password:val.password}, 'ses').subscribe({
-            //this.authService.create(`email=${val.email}&password=${val.password}`, 'ses').subscribe({
-                    next:(tkn) => {
-                            console.log('tkn', tkn);
-                            localStorage.setItem(TKN, tkn.token);
-                            this.router.navigate(['/']);
-                    },
-                    error: error => {
-                        console.log('verify: ',error)
-                        this.err = error.err?error.err:'Something went wrong';
-                    }
+                next:(tkn) => {
+                    // console.log('tkn', tkn);
+                    localStorage.setItem(TKN, tkn.token);
+                    this.router.navigate(['/']);
+                },
+                error: error => {
+                    console.log('verify: ',error)
+                    this.err = error.err?error.err:'Something went wrong';
+                }
             });
             return;
         }
@@ -75,7 +73,7 @@ export class AuthComponent implements OnInit {
         if (val.email && val.password && val.cpassword && val.password === val.cpassword) {
             this.authService.create({email:val.email, password:val.password}, 'reg').subscribe({
                 next:(res) => {
-                    console.log("User is registered", res);
+                    // console.log("User is registered", res);
                     this.router.navigate([res.location]);
                 },
                 error: error => {
@@ -90,14 +88,14 @@ export class AuthComponent implements OnInit {
         const val = this.form.value;
         if (val.email) {
             this.authService.update({email:val.email}, 'fpwd').subscribe({
-                    next:() => {
-                        console.log("fpwd");
-                        this.router.navigate(['/auth']);
-                    },
-                    error: error => {
-                        console.log('fpwd: ',error)
-                        this.err = error.err?error.err:'Something went wrong';
-                    }
+                next:() => {
+                    // console.log("fpwd");
+                    this.router.navigate(['/auth']);
+                },
+                error: error => {
+                    console.log('fpwd: ',error)
+                    this.err = error.err?error.err:'Something went wrong';
+                }
             });
         }
         this.err = 'Email is required';

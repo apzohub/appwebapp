@@ -7,6 +7,14 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+export const FORM_ENC={
+  headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded'})
+}
+
+export const BIN_ENC={
+  headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded'})
+}
+
 @Injectable()
 export class HttpService<T> {
   constructor(private http: HttpClient, @Inject(String) private apiEndpoint:string) { }
@@ -22,13 +30,13 @@ export class HttpService<T> {
   }
 
   //just deligate
-  create (entity: T|any, path?: string): Observable<any> {
+  create (entity: T|any, path?: string, opt?:any): Observable<any> {
     return this.exec(entity, path);    
   }
 
-  exec (entity: T|any, path?: string): Observable<any> {
+  exec (entity: T|any, path?: string, opt?:any): Observable<any> {
     // console.log(`${this.apiEndpoint}/${path!==undefined? path:''}`);
-    return this.http.post(`${this.apiEndpoint}${path? `/${path}`:''}`, entity, httpOptions)
+    return this.http.post(`${this.apiEndpoint}${path? `/${path}`:''}`, entity, {...httpOptions, ...opt})
     .pipe(
       //retry(1), 
       catchError(this.handleError) 
@@ -44,9 +52,9 @@ export class HttpService<T> {
     );
   }
 
-  update (entity: T|any, path?: string): Observable<any> {
+  update (entity: T|any, path?: string, opt?:any): Observable<any> {
     // console.log(`${this.apiEndpoint}/${path!==undefined? path:''}`);
-    return this.http.put(`${this.apiEndpoint}/${path!==undefined? path:''}`, entity, httpOptions)
+    return this.http.put(`${this.apiEndpoint}/${path!==undefined? path:''}`, entity, {...httpOptions, ...opt})
     .pipe(
       //retry(1), 
       catchError(this.handleError) 

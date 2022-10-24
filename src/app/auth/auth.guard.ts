@@ -47,7 +47,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   isLoggedOn(): boolean{
     const tkn = localStorage.getItem(TKN);
-    console.log('isLoggedOn', tkn == undefined);
-    return tkn == undefined;
+    console.log('isLoggedOn', tkn != undefined);
+    return tkn != undefined;
   }
 }

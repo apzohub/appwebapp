@@ -22,10 +22,10 @@ export class HomeComponent implements OnInit {
 
   logout() {
     console.log('logout');
-    localStorage.removeItem(TKN);
     this.authService.delete('ses').subscribe(
         () => {
-            console.log('logout done');
+            localStorage.removeItem(TKN);
+            console.log('logout success');
             this.router.navigate(['/auth']);
         }
     );
